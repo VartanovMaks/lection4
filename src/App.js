@@ -1,61 +1,66 @@
-import logo from './logo.svg';
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 
 function App() {
-  const firstName=React.useRef();
-  const lastName=React.useRef();
-  const email=React.useRef();
-  const age=React.useRef();
-  const password=React.useRef();
-  
-  //можно сложить в объект
-  // const inputs = React.useRef({
-  //   firstName: React.useRef(),
-  //   lastName: React.useRef(),
-  //   email: React.useRef(),
-  //   age: React.useRef(),
-  //   password: React.useRef(),
-  // })
-  const onSubmit = (e)=>{
-    e.preventDefault();
+  // const [firstName,setFirstName]=useState('');
+  // const [lastName,setLastName]=useState('');
+  // const [email,setEmail]=useState('');
+  // const [age,setAge]=useState('');
+  // const [pass,setPass]=useState('');
+  // вместо кучи отдельных стейтов сделаем один объект
 
-    alert(JSON.stringify({
-      firstName:firstName.current.value, 
-      lastName:lastName.current.value, 
-      email:email.current.value, 
-      age:age.current.value, 
-      password:password.current.value,
-    }, null, 2));
-  
-// очищаем поля ввода
-    firstName.current.value=''; 
-    lastName.current.value=''; 
-    email.current.value=''; 
-    age.current.value='';
-    password.current.value='';
+  const [userData, setUserData] = useState({
+    firstName:'',
+    lastName:'',
+    email:'',
+    age:'',
+    pass:'',
+  })
+
+
+  const handleSubmit = ()=>{
+    alert(JSON.stringify({userData},null, 2))
   }
+
+  const updateUserData=(field, value)=>{
+    setUserData({...userData,[field]:value})
+  }
+  
   return (
     <div className="App">
-      <h1> This is input!</h1>
-      <form onSubmit={onSubmit}>
-          <input ref={firstName} type='text' name='firstName' placeholder='enter your first name'/>
+      <h1> This is input!</h1>            {/* e.target.value !!*/}
+          <input value={userData.firstName} onChange={({target:{value}})=> updateUserData('firstName', value)} type='text' name='firstName' placeholder='enter your first name'/>
+          <br />                              
+          <br />
+          <input value={userData.lastName} onChange={({target:{value}})=> updateUserData('lastName', value)} type='text' name='lastName' placeholder='enter your last name' />
           <br />
           <br />
-          <input ref={lastName}type='text' name='lastName' placeholder='enter your last name' />
+          <input value={userData.email} onChange={({target:{value}})=> updateUserData('email', value)} type='email' name='email' placeholder='enter your email' />
           <br />
           <br />
-          <input ref={email}type='email' name='email' placeholder='enter your email' />
+          <input value={userData.age} onChange={({target:{value}})=> updateUserData('age', value)} type='number' name='age' placeholder='enter your age'/>
           <br />
           <br />
-          <input ref={age}type='number' name='age' placeholder='enter your age'/>
+          <input value={userData.pass} onChange={({target:{value}})=> updateUserData('pass', value)} type='password' name='pass' placeholder='enter your password'/>
           <br />
           <br />
-          <input ref={password}type='password' name='pass' placeholder='enter your password'/>
+          <button onClick={handleSubmit}>Submit</button>
+          {/* <input value={firstName} onChange={({target:{value}})=> setFirstName(value)} type='text' name='firstName' placeholder='enter your first name'/>
+          <br />                              
+          <br />
+          <input value={lastName} onChange={({target:{value}})=> setLastName(value)} type='text' name='lastName' placeholder='enter your last name' />
           <br />
           <br />
-          <button type='submit'>Submit</button>
-      </form>
+          <input value={email} onChange={({target:{value}})=> setEmail(value)} type='email' name='email' placeholder='enter your email' />
+          <br />
+          <br />
+          <input value={age} onChange={({target:{value}})=> setAge(value)} type='number' name='age' placeholder='enter your age'/>
+          <br />
+          <br />
+          <input value={pass} onChange={({target:{value}})=> setPass(value)} type='password' name='pass' placeholder='enter your password'/>
+          <br />
+          <br />
+          <button onClick={handleSubmit}>Submit</button> */}
     </div>
   );
 }
