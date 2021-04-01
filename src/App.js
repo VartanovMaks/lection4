@@ -19,10 +19,23 @@ function App() {
 
   const handleSubmit = ()=>{
     alert(JSON.stringify({userData},null, 2))
+    // можем вставить очистку формы после заполнения
+    setUserData({
+      firstName:'',
+    lastName:'',
+    email:'',
+    age:'',
+    pass:'',
+    })
   }
   
   const updateUserData=(e)=>{
     const {target:{value, name} } = e
+    if(name==='firstName' && value.split(' ').length > 1){
+      setUserData({...userData,[name]:value, lastName:''})
+
+      return
+    }
     //Здесь можно сделать проверки данных
     if (name === 'age' && Number(value) >= 99){
       return
