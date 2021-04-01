@@ -9,6 +9,14 @@ function App() {
   const age=React.useRef();
   const password=React.useRef();
   
+  //можно сложить в объект
+  // const inputs = React.useRef({
+  //   firstName: React.useRef(),
+  //   lastName: React.useRef(),
+  //   email: React.useRef(),
+  //   age: React.useRef(),
+  //   password: React.useRef(),
+  // })
   const onSubmit = (e)=>{
     e.preventDefault();
 
